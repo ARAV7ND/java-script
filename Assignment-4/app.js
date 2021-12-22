@@ -1,0 +1,38 @@
+
+// localStorage.setItem("count",10);
+
+// document.querySelector('#local').textContent = localStorage.getItem("count");
+
+
+// sessionStorage.setItem("count",20);
+// document.querySelector('.session').textContent = sessionStorage.getItem("count");
+
+
+
+// localStorage.clear();
+// sessionStorage.clear();
+
+
+document.querySelector('form').addEventListener('submit',
+function(e){
+    
+    if(localStorage.getItem("count")==null){
+        localStorage.setItem("count",1);
+    }else{
+        let count = localStorage.getItem("count");
+        count = parseInt(count) + 1;
+        localStorage.setItem("count",count);
+    }
+
+    if(sessionStorage.getItem("count")==null){
+        sessionStorage.setItem("count",1);
+    }else{
+        let count = sessionStorage.getItem("count");
+        count = parseInt(count) + 1;
+        sessionStorage.setItem("count",count);
+    }
+    document.querySelector("#local").textContent = localStorage.getItem("count");
+    document.querySelector(".session").textContent = sessionStorage.getItem("count");
+    e.preventDefault();
+});
+

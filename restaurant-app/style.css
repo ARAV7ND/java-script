@@ -1,0 +1,121 @@
+body {
+  font-size: 16px;
+  background-color: white;
+}
+.menu {
+  float: right;
+  width: 70%;
+  box-shadow: 100px grey;
+}
+.menu h1 {
+  text-align: center;
+}
+.item-body {
+  margin-top: 25px;
+  padding: 15px 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+.separator {
+  height: 100%;
+  width: 2px;
+  background-color: black;
+  position: fixed;
+  left: 29%;
+}
+.tables {
+  float: left;
+  width: 27%;
+  padding: 0 10px;
+  cursor: pointer;
+}
+/* #container {
+  opacity: 1;
+ background-color: rgba(0, 0, 0, 0.5);
+} */
+.tables h1 {
+  text-align: center;
+}
+input {
+  background-color: inherit;
+  color: black;
+}
+.table-body {
+  width: 90%;
+  margin-top: 25px;
+  padding: 15px 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.table-body > * {
+  pointer-events: none;
+}
+
+.search-box {
+  width: 50%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.search-box input {
+  margin: 10px 0px 10px;
+  text-align: center;
+  border-style: none;
+  margin-bottom: 20px;
+  outline: none;
+}
+
+.hovered {
+  background-color: yellow;
+}
+
+.table-details {
+  position: fixed;
+  visibility: hidden;
+  width: 30%;
+  height: auto;
+  left: 30%;
+  top: 20%;
+  background-color: white;
+  /* border: 1px solid black; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  overflow: auto;
+}
+.table-details > .header {
+  /* text-align: center; */
+  background-color: rgb(0, 0, 204);
+
+  color: white;
+  padding: 10px;
+}
+
+#tableItems {
+  width: 100%;
+  margin-top: 10px;
+}
+.closeButton {
+  margin-top: -50px;
+  margin-right: 25px;
+  float: right;
+  background: none;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+}
+
+.total {
+  margin: 10px 130px;
+}
+
+#generateBill {
+  cursor: pointer;
+  float: right;
+  background-color: white;
+  margin: 10px;
+  border: none;
+  outline: none;
+}
