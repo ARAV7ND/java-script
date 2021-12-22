@@ -45,7 +45,7 @@ const menuItems = [
     
 ];
 
-
+//loading items
 for(let i=0;i<menuItems.length;i++){
     let menuList = document.getElementsByClassName('menu-items')[0];
     menuList.insertAdjacentHTML("beforeBegin",`
@@ -58,6 +58,7 @@ for(let i=0;i<menuItems.length;i++){
 }
 
 
+//search for items
 const searchForItems = () => {
     let input = document.getElementById('myMenuInput').value.toLowerCase();
     const cards = document.getElementsByClassName("item-body");
@@ -100,18 +101,18 @@ const table = [
 ];
 
 //loading tables
-    for(let i=0;i<table.length;i++){
+for(let i=0;i<table.length;i++){
         let tableList = document.getElementsByClassName('table')[0];
         tableList.insertAdjacentHTML("beforeBegin",
-            `<div class="table-body" id="table${table[i].id}"  ondrop="drop(event)" ondragover="allowDrop(event)"  onclick="orderDetails(event)" 
-                        ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondragend="wohoo(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)">
-                <h2 class="tableName">${table[i]['name']}</h2>
-                <p id="table-totalPrice${table[i].id}">Total :&nbsp ${table[i]['price']}&nbsp Rs</p>
-                <p id="table-totalItems${table[i].id}">No of items : ${table[i]['quantity']} </p>
-            </div>`
+                `<div class="table-body" id="table${table[i].id}"  ondrop="drop(event)" ondragover="allowDrop(event)"  onclick="orderDetails(event)" 
+                            ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondragend="wohoo(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)">
+                    <h2 class="tableName">${table[i]['name']}</h2>
+                    <p id="table-totalPrice${table[i].id}">Total :&nbsp ${table[i]['price']}&nbsp Rs</p>
+                    <p id="table-totalItems${table[i].id}">No of items : ${table[i]['quantity']} </p>
+                </div>`
 
         );
-    }
+}
 
 
 //search for table    
