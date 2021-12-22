@@ -104,8 +104,8 @@ const table = [
 for(let i=0;i<table.length;i++){
         let tableList = document.getElementsByClassName('table')[0];
         tableList.insertAdjacentHTML("beforeBegin",
-                `<div class="table-body" id="table${table[i].id}"  ondrop="drop(event)" ondragover="allowDrop(event)"  onclick="orderDetails(event)" 
-                            ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondragend="wohoo(event)" onmouseenter="mouseEnter(event)" onmouseleave="mouseLeave(event)">
+                `<div class="table-body" id="table${table[i].id}"  ondrop="drop(event)" ondragover="allowDrop(event)"  onclick="orderDetails(event)"
+                                ondragenter="dragEnter(event)" ondragleave="dragLeave(event)">
                     <h2 class="tableName">${table[i]['name']}</h2>
                     <p id="table-totalPrice${table[i].id}">Total :&nbsp ${table[i]['price']}&nbsp Rs</p>
                     <p id="table-totalItems${table[i].id}">No of items : ${table[i]['quantity']} </p>
@@ -138,27 +138,8 @@ function onDragStart(ev,id){
 
 function allowDrop(ev) {
     ev.preventDefault();
-    
 }
 
-function dragEnter(ev){
-    console.log('enter');
-    ev.target.className += ' hovered';
-}
-function dragLeave(ev){
-    ev.target.className = 'table-body';
-}
-
-function wohoo(ev){
-    console.log("dropped");
-}
-
-function mouseEnter(ev){
-    ev.target.className += ' hovered';
-}
-function mouseLeave(ev){
-    ev.target.className = 'table-body';
-}
 function drop(ev){
     ev.preventDefault();
     let tableId = ev.target.id.match(/\d+/g);
@@ -171,16 +152,23 @@ function drop(ev){
     }
     table[tableId-1]['price'] += menuItems[selectedItemId-1]['price'];
     table[tableId-1]['quantity']++
+    document.getElementById(ev.target.id).style.backgroundColor="inherit";
     document.getElementById("table-totalPrice"+tableId).textContent = "Total : " + table[tableId-1]['price']+" Rs "; 
     document.getElementById("table-totalItems"+tableId).textContent = "No of items :" +table[tableId-1]['quantity'];
 }
 
-
+function dragEnter(ev){
+    document.getElementById(ev.target.id).style.backgroundColor="rgb(255, 204, 0,0.8)";
+}
+function dragLeave(ev){
+    document.getElementById(ev.target.id).style.backgroundColor="inherit";
+}
 function orderDetails(ev){
 
     document.querySelector(".table-details").style.visibility = "visible";
     document.querySelector('body').style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-    document.getElementById(ev.target.id).style.backgroundColor="yellow";
+    document.getElementById(ev.target.id).style.backgroundColor="rgb(255, 204, 0,0.5)";
+    document.querySelector('.tables').className += " child-events";
     let tableId = ev.target.id.match(/\d+/g); 
     console.log(tableId);
     let header = document.getElementById('order-header');
@@ -190,8 +178,8 @@ function orderDetails(ev){
 
 function renderOrderItems(tableId){
     if(table[tableId-1].quantity>0){
-        let innerHTMLString = "";
-        innerHTMLString += 
+        let htmlString = "";
+        htmlString += 
             `<tr>
                 <th>S.No</th>
                 <th>Item</th>
@@ -203,7 +191,7 @@ function renderOrderItems(tableId){
         for (const [key, value] of table[tableId-1].itemList.entries()) {
             if(i<=table[tableId-1]['itemList'].size){
 
-                innerHTMLString +=`
+                htmlString +=`
                 <tr>
                     <td>${i}</td>
                     <td>${menuItems[key-1]['name']}</td>
@@ -213,7 +201,7 @@ function renderOrderItems(tableId){
                 </tr>`; 
                 i++;
             }
-            document.getElementById("table-items").innerHTML = innerHTMLString;
+            document.getElementById("table-items").innerHTML = htmlString;
         }
         document.querySelector('#total-price').textContent = table[tableId-1].price;
     }else{
@@ -223,25 +211,17 @@ function renderOrderItems(tableId){
     document.querySelector('.closeButton').id = tableId;
 }
 function closeTableDetails(ev){
-    console.log("closed : ",ev.target.id);
     document.querySelector(".table-details").style.visibility = "hidden";
+    document.querySelector('.tables').className = "tables";
     document.querySelector('body').style.backgroundColor = "white";
     document.getElementById(`table${ev.target.id}`).style.backgroundColor="inherit";
 }
 function deleteItem(tableId,itemId){
-    console.log(table[tableId]);
-    console.log("item : ",itemId,"table : ",tableId);
-    console.log(menuItems[itemId-1].name);
     var count = table[tableId].itemList.get(itemId);
-    console.log("count : ",count);
     price = menuItems[itemId-1].price;
     table[tableId].price -= price * count;
     table[tableId].quantity -= count;
-    console.log("del tapped");
-    console.log(table[tableId]);
     table[tableId].itemList.delete(itemId);
-    console.log(table[tableId]);
-    
     document.getElementById("table-totalPrice"+(parseInt(tableId)+1)).textContent = "Total : " + table[tableId]['price']+" Rs "; 
     document.getElementById("table-totalItems"+(parseInt(tableId)+1)).textContent = "No of items :" +table[tableId]['quantity'];
     renderOrderItems(parseInt(tableId)+1);
@@ -249,11 +229,8 @@ function deleteItem(tableId,itemId){
 
 function updateQuantity(tableId,itemId){
     let newQuantity = document.querySelector(".quantity"+itemId).value;
-    console.log(newQuantity);
     if(newQuantity==0){
-        console.log(tableId,itemId);
         deleteItem(tableId-1,itemId);
-
     }
     else{
         let oldQuantity = table[tableId-1].itemList.get(itemId);
@@ -271,8 +248,6 @@ function updateQuantity(tableId,itemId){
 }
 
 function generateBill(ev){
-    console.log(ev.target.id);
     let bill = document.getElementById("total-price").textContent;
-    console.log(bill);
     alert(`Total Bill : ${bill}`,location.reload());
 }
