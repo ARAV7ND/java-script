@@ -99,7 +99,7 @@ const table = [
     
 ];
 
-//loading tables
+//search for tables
 function searchForTable(){
     let input = document.getElementById('myTableInput').value.toLowerCase(); 
     const table = document.getElementsByClassName("table-body");
