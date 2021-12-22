@@ -1,18 +1,3 @@
-
-// localStorage.setItem("count",10);
-
-// document.querySelector('#local').textContent = localStorage.getItem("count");
-
-
-// sessionStorage.setItem("count",20);
-// document.querySelector('.session').textContent = sessionStorage.getItem("count");
-
-
-
-// localStorage.clear();
-// sessionStorage.clear();
-
-
 document.querySelector('form').addEventListener('submit',
 function(e){
     
